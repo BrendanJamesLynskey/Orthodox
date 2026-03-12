@@ -6,7 +6,7 @@ A web-based synthesizer that generates ethereal Byzantine Orthodox chant using p
 
 *The app features the 6th-century Christ Pantocrator icon from Saint Catherine's Monastery, Sinai.*
 
-**[Launch the app](https://brendanjameslynskey.github.io/Orthodox/)** — auto-detects your device and recommends desktop or mobile
+**[Launch the app](https://brendanjameslynskey.github.io/Synth_Orthodox/)** — auto-detects your device and recommends desktop or mobile
 
 ## Features
 
