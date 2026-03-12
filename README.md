@@ -6,6 +6,8 @@ A web-based synthesizer that generates ethereal Byzantine Orthodox chant using p
 
 *The app features the 6th-century Christ Pantocrator icon from Saint Catherine's Monastery, Sinai.*
 
+**[Launch the mobile app](orthodox_chant_mobile.html)** — single-file version, works on any phone
+
 ## Features
 
 - **8 Byzantine Echoi** (modes) with historically-informed interval structures — diatonic, chromatic, and enharmonic genera
