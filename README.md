@@ -6,7 +6,7 @@ A web-based synthesizer that generates ethereal Byzantine Orthodox chant using p
 
 *The app features the 6th-century Christ Pantocrator icon from Saint Catherine's Monastery, Sinai.*
 
-**[Launch the mobile app](orthodox_chant_mobile.html)** — single-file version, works on any phone
+**[Launch the app](https://brendanjameslynskey.github.io/Orthodox/)** — auto-detects your device and recommends desktop or mobile
 
 ## Features
 
@@ -47,12 +47,13 @@ AirDrop or transfer the single file — no server needed.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Desktop web app entry point |
+| `index.html` | Landing page — detects device, links to desktop or mobile |
+| `desktop.html` | Desktop web app (multi-file) |
 | `style.css` | Orthodox-themed styles (gold, crimson, navy palette) |
 | `chant-engine.js` | Audio synthesis engine (Web Audio API) |
 | `app.js` | UI controller, visualizer, incense particles |
 | `pantocrator.jpg` | 6th-century Christ Pantocrator icon (Wikimedia Commons) |
-| `orthodox_chant_mobile.html` | Self-contained mobile version (single file) |
+| `orthodox_chant_mobile.html` | Self-contained mobile version (single file, ~210 KB) |
 
 ## Controls
 

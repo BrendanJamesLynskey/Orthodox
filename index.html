@@ -7,111 +7,237 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --gold: #c8a84e;
+            --gold-bright: #ffd700;
+            --gold-dark: #8b6914;
+            --crimson: #8b0000;
+            --parchment: #f5e6c8;
+            --text-gold: #e8d5a0;
+            --text-light: #c8b888;
+            --bg-dark: #0a0a1a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-dark);
+            color: var(--text-gold);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(200, 168, 78, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(139, 0, 0, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M29 8v16M29 36v16M21 28h16' stroke='%23c8a84e' stroke-width='0.3' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+        }
+        .cross { font-size: 2.5rem; color: var(--gold); text-shadow: 0 0 20px rgba(200, 168, 78, 0.4); }
+        h1 {
+            font-family: 'Uncial Antiqua', 'Cinzel', serif;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-weight: 400;
+            color: var(--gold-bright);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.05em;
+            margin: 1rem 0 0.3rem;
+        }
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .icon-frame {
+            width: 160px;
+            margin: 0 auto 2.5rem;
+            padding: 10px;
+            background: linear-gradient(145deg, #2a2218, #1a1508);
+            border: 3px solid var(--gold-dark);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(200, 168, 78, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        .icon-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 3px;
+            filter: saturate(0.85) contrast(1.05);
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+        a.btn {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--parchment);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+        a.btn:active { transform: scale(0.97); }
+        a.btn.primary {
+            background: linear-gradient(145deg, var(--crimson), #6b0000);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        a.btn.primary:hover {
+            background: linear-gradient(145deg, #a52a2a, #8b0000);
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.6), 0 0 20px rgba(200, 168, 78, 0.2);
+        }
+        a.btn.secondary {
+            background: linear-gradient(145deg, #1a1a3e, #0d0d24);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        a.btn.secondary:hover {
+            background: linear-gradient(145deg, #2a2a5e, #1a1a3e);
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(26, 26, 62, 0.6), 0 0 20px rgba(200, 168, 78, 0.15);
+        }
+        .btn-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+        .recommended {
+            font-size: 0.7rem;
+            color: var(--gold);
+            background: rgba(200, 168, 78, 0.1);
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            border: 1px solid rgba(200, 168, 78, 0.2);
+            margin-left: 0.3rem;
+        }
+        .ornament-line {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0 1.5rem;
+            width: 100%;
+        }
+        .ornament-dot {
+            width: 5px; height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .ornament-rule {
+            flex: 1; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+        .ornament-cross {
+            color: var(--gold);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        footer {
+            margin-top: 2.5rem;
+        }
+        footer p {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            letter-spacing: 0.12em;
+        }
+        footer .slavonic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.75rem;
+            color: var(--gold-dark);
+            margin-top: 0.2rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="icon-border-top"></div>
-    <div class="incense-container" id="incenseContainer"></div>
-
-    <header>
-        <div class="cross-ornament">&#x2626;</div>
+    <div class="content">
+        <div class="cross">&#x2626;</div>
         <h1>&#x03A8;&#x03B1;&#x03BB;&#x03BC;&#x1F78;&#x03C2; &#x1F48;&#x03C1;&#x03B8;&#x03CC;&#x03B4;&#x03BF;&#x03BE;&#x03BF;&#x03C2;</h1>
-        <p class="subtitle">A Digital Psalterion</p>
-        <div class="cross-ornament">&#x2626;</div>
-    </header>
+        <p class="subtitle">Orthodox Chant Synthesizer</p>
 
-    <main>
-        <!-- Central Icon -->
-        <div class="icon-frame" id="mainIcon">
-            <img class="orthodox-icon" src="pantocrator.jpg"
-                 alt="Christ Pantocrator — 6th century icon, Saint Catherine's Monastery, Sinai">
-            <div class="icon-glow"></div>
+        <div class="icon-frame">
+            <img src="pantocrator.jpg" alt="Christ Pantocrator — 6th century icon, Sinai">
         </div>
 
-        <!-- Transport Controls -->
-        <div class="controls-panel">
-            <div class="ornament-line">
-                <span class="ornament-dot"></span>
-                <span class="ornament-rule"></span>
-                <span class="ornament-cross">&#x2626;</span>
-                <span class="ornament-rule"></span>
-                <span class="ornament-dot"></span>
-            </div>
-
-            <div class="transport">
-                <button class="btn-chant" id="btnChant" onclick="toggleChant()">
-                    <span class="btn-icon">&#x266A;</span>
-                    <span class="btn-text">Begin Chant</span>
-                </button>
-            </div>
-
-            <!-- Mode Selector -->
-            <div class="control-group">
-                <label class="control-label">&#x2726; Tone (Echos)</label>
-                <div class="mode-selector">
-                    <button class="mode-btn active" data-mode="1" onclick="setMode(1)">&#x0391;&#x2032;</button>
-                    <button class="mode-btn" data-mode="2" onclick="setMode(2)">&#x0392;&#x2032;</button>
-                    <button class="mode-btn" data-mode="3" onclick="setMode(3)">&#x0393;&#x2032;</button>
-                    <button class="mode-btn" data-mode="4" onclick="setMode(4)">&#x0394;&#x2032;</button>
-                    <button class="mode-btn" data-mode="5" onclick="setMode(5)">&#x03A0;&#x03BB;&#x2032;</button>
-                    <button class="mode-btn" data-mode="6" onclick="setMode(6)">&#x03A0;&#x03BB;&#x2032;&#x2032;</button>
-                    <button class="mode-btn" data-mode="7" onclick="setMode(7)">&#x0392;&#x03B1;&#x2032;</button>
-                    <button class="mode-btn" data-mode="8" onclick="setMode(8)">&#x03A0;&#x03BB;&#x2032;&#x2032;&#x2032;</button>
-                </div>
-            </div>
-
-            <!-- Sliders -->
-            <div class="sliders-grid">
-                <div class="control-group">
-                    <label class="control-label">&#x2726; Ison (Drone)</label>
-                    <input type="range" class="slider" id="droneVol" min="0" max="100" value="60" oninput="updateDrone()">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">&#x2726; Melody</label>
-                    <input type="range" class="slider" id="melodyVol" min="0" max="100" value="70" oninput="updateMelody()">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">&#x2726; Reverence (Reverb)</label>
-                    <input type="range" class="slider" id="reverbMix" min="0" max="100" value="65" oninput="updateReverb()">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">&#x2726; Tempo</label>
-                    <input type="range" class="slider" id="tempoSlider" min="30" max="90" value="55" oninput="updateTempo()">
-                </div>
-            </div>
-
-            <!-- Choir Size -->
-            <div class="control-group">
-                <label class="control-label">&#x2726; Choir Voices</label>
-                <div class="mode-selector">
-                    <button class="choir-btn active" data-voices="1" onclick="setVoices(1)">Solo</button>
-                    <button class="choir-btn" data-voices="3" onclick="setVoices(3)">Small</button>
-                    <button class="choir-btn" data-voices="6" onclick="setVoices(6)">Full</button>
-                </div>
-            </div>
-
-            <div class="ornament-line">
-                <span class="ornament-dot"></span>
-                <span class="ornament-rule"></span>
-                <span class="ornament-cross">&#x2626;</span>
-                <span class="ornament-rule"></span>
-                <span class="ornament-dot"></span>
-            </div>
+        <div class="links" id="links">
+            <a class="btn primary" href="orthodox_chant_mobile.html" id="mobileLink">
+                &#x266A;&ensp;Mobile
+            </a>
+            <a class="btn secondary" href="desktop.html" id="desktopLink">
+                &#x266A;&ensp;Desktop
+            </a>
         </div>
 
-        <!-- Visualization -->
-        <div class="visualization-frame">
-            <canvas id="vizCanvas" width="800" height="200"></canvas>
+        <div class="ornament-line">
+            <span class="ornament-dot"></span>
+            <span class="ornament-rule"></span>
+            <span class="ornament-cross">&#x2626;</span>
+            <span class="ornament-rule"></span>
+            <span class="ornament-dot"></span>
         </div>
-    </main>
 
-    <footer>
-        <div class="cross-ornament small">&#x2626;</div>
-        <p>Glory to God for all things</p>
-        <p class="slavonic">&#x0421;&#x043B;&#x0430;&#x0432;&#x0430; &#x0411;&#x043E;&#x0433;&#x0443; &#x0437;&#x0430; &#x0432;&#x0441;&#x0435;</p>
-    </footer>
+        <footer>
+            <p>Glory to God for all things</p>
+            <p class="slavonic">&#x0421;&#x043B;&#x0430;&#x0432;&#x0430; &#x0411;&#x043E;&#x0433;&#x0443; &#x0437;&#x0430; &#x0432;&#x0441;&#x0435;</p>
+        </footer>
+    </div>
 
-    <script src="chant-engine.js"></script>
-    <script src="app.js"></script>
+    <script>
+        // Detect mobile and highlight the recommended version
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+                       (navigator.maxTouchPoints > 1 && window.innerWidth < 768);
+
+        var mobileLink = document.getElementById('mobileLink');
+        var desktopLink = document.getElementById('desktopLink');
+
+        if (isMobile) {
+            mobileLink.innerHTML = '&#x266A;&ensp;Mobile <span class="recommended">recommended</span>';
+            // Put recommended first (it already is)
+        } else {
+            desktopLink.classList.remove('secondary');
+            desktopLink.classList.add('primary');
+            mobileLink.classList.remove('primary');
+            mobileLink.classList.add('secondary');
+            desktopLink.innerHTML = '&#x266A;&ensp;Desktop <span class="recommended">recommended</span>';
+            // Reorder: desktop first
+            document.getElementById('links').prepend(desktopLink);
+        }
+    </script>
 </body>
 </html>
