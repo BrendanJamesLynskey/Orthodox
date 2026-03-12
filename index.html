@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ψαλμὸς Ὀρθόδοξος — Orthodox Chant Synthesizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="icon-border-top"></div>
+    <div class="incense-container" id="incenseContainer"></div>
+
+    <header>
+        <div class="cross-ornament">&#x2626;</div>
+        <h1>&#x03A8;&#x03B1;&#x03BB;&#x03BC;&#x1F78;&#x03C2; &#x1F48;&#x03C1;&#x03B8;&#x03CC;&#x03B4;&#x03BF;&#x03BE;&#x03BF;&#x03C2;</h1>
+        <p class="subtitle">A Digital Psalterion</p>
+        <div class="cross-ornament">&#x2626;</div>
+    </header>
+
+    <main>
+        <!-- Central Icon -->
+        <div class="icon-frame" id="mainIcon">
+            <img class="orthodox-icon" src="pantocrator.jpg"
+                 alt="Christ Pantocrator — 6th century icon, Saint Catherine's Monastery, Sinai">
+            <div class="icon-glow"></div>
+        </div>
+
+        <!-- Transport Controls -->
+        <div class="controls-panel">
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-cross">&#x2626;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+
+            <div class="transport">
+                <button class="btn-chant" id="btnChant" onclick="toggleChant()">
+                    <span class="btn-icon">&#x266A;</span>
+                    <span class="btn-text">Begin Chant</span>
+                </button>
+            </div>
+
+            <!-- Mode Selector -->
+            <div class="control-group">
+                <label class="control-label">&#x2726; Tone (Echos)</label>
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="1" onclick="setMode(1)">&#x0391;&#x2032;</button>
+                    <button class="mode-btn" data-mode="2" onclick="setMode(2)">&#x0392;&#x2032;</button>
+                    <button class="mode-btn" data-mode="3" onclick="setMode(3)">&#x0393;&#x2032;</button>
+                    <button class="mode-btn" data-mode="4" onclick="setMode(4)">&#x0394;&#x2032;</button>
+                    <button class="mode-btn" data-mode="5" onclick="setMode(5)">&#x03A0;&#x03BB;&#x2032;</button>
+                    <button class="mode-btn" data-mode="6" onclick="setMode(6)">&#x03A0;&#x03BB;&#x2032;&#x2032;</button>
+                    <button class="mode-btn" data-mode="7" onclick="setMode(7)">&#x0392;&#x03B1;&#x2032;</button>
+                    <button class="mode-btn" data-mode="8" onclick="setMode(8)">&#x03A0;&#x03BB;&#x2032;&#x2032;&#x2032;</button>
+                </div>
+            </div>
+
+            <!-- Sliders -->
+            <div class="sliders-grid">
+                <div class="control-group">
+                    <label class="control-label">&#x2726; Ison (Drone)</label>
+                    <input type="range" class="slider" id="droneVol" min="0" max="100" value="60" oninput="updateDrone()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">&#x2726; Melody</label>
+                    <input type="range" class="slider" id="melodyVol" min="0" max="100" value="70" oninput="updateMelody()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">&#x2726; Reverence (Reverb)</label>
+                    <input type="range" class="slider" id="reverbMix" min="0" max="100" value="65" oninput="updateReverb()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">&#x2726; Tempo</label>
+                    <input type="range" class="slider" id="tempoSlider" min="30" max="90" value="55" oninput="updateTempo()">
+                </div>
+            </div>
+
+            <!-- Choir Size -->
+            <div class="control-group">
+                <label class="control-label">&#x2726; Choir Voices</label>
+                <div class="mode-selector">
+                    <button class="choir-btn active" data-voices="1" onclick="setVoices(1)">Solo</button>
+                    <button class="choir-btn" data-voices="3" onclick="setVoices(3)">Small</button>
+                    <button class="choir-btn" data-voices="6" onclick="setVoices(6)">Full</button>
+                </div>
+            </div>
+
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-cross">&#x2626;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+        </div>
+
+        <!-- Visualization -->
+        <div class="visualization-frame">
+            <canvas id="vizCanvas" width="800" height="200"></canvas>
+        </div>
+    </main>
+
+    <footer>
+        <div class="cross-ornament small">&#x2626;</div>
+        <p>Glory to God for all things</p>
+        <p class="slavonic">&#x0421;&#x043B;&#x0430;&#x0432;&#x0430; &#x0411;&#x043E;&#x0433;&#x0443; &#x0437;&#x0430; &#x0432;&#x0441;&#x0435;</p>
+    </footer>
+
+    <script src="chant-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
